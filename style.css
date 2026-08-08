@@ -530,3 +530,43 @@ button {
     }
 
 }
+
+/* =========================================
+   RUNAWAY YES BUTTON
+========================================= */
+
+#yes2 {
+    transition:
+        left 0.15s ease,
+        top 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+/* =========================================
+   SLIDER SNAP-BACK
+========================================= */
+
+#careSlider {
+    transition: transform 0.12s ease;
+}
+
+.slider-bounce {
+    animation: sliderBounce 0.25s ease;
+}
+
+@keyframes sliderBounce {
+
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
