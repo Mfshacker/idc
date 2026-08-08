@@ -173,78 +173,75 @@ document.getElementById("continue3").addEventListener("click", () => {
 
 
 /* =========================================
-   SCALE
+   MISCHIEVOUS CARE SLIDER
 ========================================= */
 
 const slider = document.getElementById("careSlider");
 const dingBtn = document.getElementById("dingBtn");
 
+slider.value = 0;
+
+let sliderTimer;
 
 /*
-   Always keep the slider at the bottom.
-
-   Whenever someone tries to drag it upward,
-   immediately return it to 0.
+   Let the user drag normally.
+   Once they stop dragging, snap back to 0.
 */
-
-slider.value = 0;
 
 slider.addEventListener("input", () => {
 
-    if (Number(slider.value) > 0) {
+    // Cancel any previous return animation
+    clearTimeout(sliderTimer);
+
+    /*
+       Wait until the user stops dragging.
+       This makes the slider actually follow
+       their finger/mouse while dragging.
+    */
+
+    sliderTimer = setTimeout(() => {
+
+        slider.classList.add("returning");
 
         slider.value = 0;
 
         /*
-           Small visual "bounce" effect.
+           Remove the animation class after
+           the return animation finishes.
         */
 
-        slider.classList.remove("slider-bounce");
+        setTimeout(() => {
+            slider.classList.remove("returning");
+        }, 450);
 
-        void slider.offsetWidth;
-
-        slider.classList.add("slider-bounce");
-    }
+    }, 120);
 
 });
 
 
 /*
-   Also catch mouse/touch attempts.
+   Also snap back when the user releases
+   the mouse/finger.
 */
 
 slider.addEventListener("change", () => {
 
+    clearTimeout(sliderTimer);
+
+    slider.classList.add("returning");
+
     slider.value = 0;
+
+    setTimeout(() => {
+        slider.classList.remove("returning");
+    }, 450);
 
 });
 
 
 /*
-   Keep it at zero when clicked.
+   DING DING DING button
 */
-
-slider.addEventListener("mousedown", () => {
-
-    setTimeout(() => {
-        slider.value = 0;
-    }, 50);
-
-});
-
-
-slider.addEventListener("touchstart", () => {
-
-    setTimeout(() => {
-        slider.value = 0;
-    }, 50);
-
-});
-
-
-/* =========================================
-   DING DING DING
-========================================= */
 
 dingBtn.addEventListener("click", () => {
 
