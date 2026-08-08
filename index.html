@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>idc. — A Quiz For The Unbothered</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Progress -->
+        <div class="progress">
+            <span class="brand-small">idc.</span>
+
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- Main card -->
+        <main class="card">
+
+            <!-- PAGE 1 -->
+            <section class="screen active" id="screen1">
+
+                <div class="logo">
+                    idc.
+                </div>
+
+                <p class="tagline">
+                    A QUIZ FOR THE UNBOTHERED
+                </p>
+
+                <h1>
+                    Do you really think I'm<br>
+                    reading all of this?
+                </h1>
+
+                <button class="pink-btn" id="next1">
+                    Next →
+                </button>
+
+            </section>
+
+
+            <!-- PAGE 2 -->
+            <section class="screen" id="screen2">
+
+                <h1>
+                    No, like... do you
+                    <em>really</em>
+                    think I'm reading all of that?
+                </h1>
+
+                <div class="button-row">
+
+                    <button class="white-btn" id="yes2">
+                        Yes
+                    </button>
+
+                    <button class="pink-btn" id="no2">
+                        No
+                    </button>
+
+                </div>
+
+                <small>
+                    (choose wisely)
+                </small>
+
+            </section>
+
+
+            <!-- PAGE 3 -->
+            <section class="screen" id="screen3">
+
+                <div class="emoji">
+                    🥳
+                </div>
+
+                <h1>
+                    You're right!<br>
+                    You're just wasting<br>
+                    your time.
+                </h1>
+
+                <p>
+                    Absolutely nobody asked for that essay.
+                </p>
+
+                <button class="pink-btn" id="continue3">
+                    Continue 💀
+                </button>
+
+            </section>
+
+
+            <!-- PAGE 4 -->
+            <section class="screen" id="screen4">
+
+                <h1>
+                    On a scale of
+                    "don't care at all"
+                    to "care sooo much"...
+                </h1>
+
+                <p>
+                    How much do I actually care about your message?
+                </p>
+
+                <div class="slider-area">
+
+                    <span class="slider-label top">
+                        I CARE SOOO MUCH 🥺
+                    </span>
+
+                    <input
+                        type="range"
+                        id="careSlider"
+                        min="0"
+                        max="100"
+                        value="0"
+                        orient="vertical"
+                    >
+
+                    <span class="slider-label bottom">
+                        I DON'T CARE AT ALL 😭
+                    </span>
+
+                </div>
+
+                <button class="pink-btn" id="dingBtn">
+                    DING DING DING 🔔
+                </button>
+
+            </section>
+
+
+            <!-- PAGE 5 -->
+            <section class="screen" id="screen5">
+
+                <h1>
+                    Can you please stop<br>
+                    texting me?
+                </h1>
+
+                <div class="button-row">
+
+                    <button class="pink-btn" id="yes5">
+                        Yes
+                    </button>
+
+                    <button class="white-btn runaway" id="no5">
+                        No
+                    </button>
+
+                </div>
+
+                <small>
+                    (there is only one right answer)
+                </small>
+
+            </section>
+
+
+            <!-- PAGE 6 -->
+            <section class="screen final" id="screen6">
+
+                <div class="confetti"></div>
+
+                <h1>
+                    THANK GOD
+                </h1>
+
+                <div class="hands">
+                    🙌 🙌 🙌
+                </div>
+
+                <p>
+                    Glad we could clear that up. Have the day you deserve!
+                </p>
+
+                <div class="final-buttons">
+
+                    <button class="pink-btn" id="shareBtn">
+                        Share with a friend 💌
+                    </button>
+
+                    <button class="white-btn" id="replayBtn">
+                        Replay 🔄
+                    </button>
+
+                </div>
+
+                <div class="replit">
+                    <span>Built on</span>
+                    <strong>Replit</strong>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
