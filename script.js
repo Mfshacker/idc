@@ -28,39 +28,142 @@ function showScreen(number) {
 }
 
 
-/* --------------------------------
+/* =========================================
    SCREEN 1
--------------------------------- */
+========================================= */
 
 document.getElementById("next1").addEventListener("click", () => {
-
     showScreen(1);
-
 });
 
 
-/* --------------------------------
+/* =========================================
    SCREEN 2
--------------------------------- */
+   YES BUTTON RUNS AWAY
+========================================= */
 
-document.getElementById("yes2").addEventListener("click", () => {
+const yes2 = document.getElementById("yes2");
 
-    // Yes doesn't let them escape the joke
-    showScreen(2);
+function moveYesButton() {
+
+    const padding = 20;
+
+    const buttonWidth = yes2.offsetWidth;
+    const buttonHeight = yes2.offsetHeight;
+
+    const maxX = window.innerWidth - buttonWidth - padding;
+    const maxY = window.innerHeight - buttonHeight - padding;
+
+    const x =
+        padding +
+        Math.random() * Math.max(0, maxX - padding);
+
+    const y =
+        padding +
+        Math.random() * Math.max(0, maxY - padding);
+
+    yes2.style.position = "fixed";
+    yes2.style.left = `${x}px`;
+    yes2.style.top = `${y}px`;
+
+    yes2.style.zIndex = "9999";
+}
+
+
+/*
+   Desktop:
+   The YES button moves when the mouse
+   gets close to it.
+*/
+
+yes2.addEventListener("mouseenter", moveYesButton);
+
+
+/*
+   Also detect the mouse getting close,
+   instead of requiring an actual hover.
+*/
+
+document.addEventListener("mousemove", (event) => {
+
+    if (!screens[1].classList.contains("active")) {
+        return;
+    }
+
+    const rect = yes2.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const distance = Math.sqrt(
+        Math.pow(event.clientX - centerX, 2) +
+        Math.pow(event.clientY - centerY, 2)
+    );
+
+    /*
+       100px = escape distance.
+       Increase this if you want it harder to catch.
+    */
+
+    if (distance < 100) {
+        moveYesButton();
+    }
 
 });
 
+
+/*
+   Mobile:
+   Move the button when the user tries
+   to touch it.
+*/
+
+yes2.addEventListener("touchstart", (event) => {
+
+    event.preventDefault();
+
+    moveYesButton();
+
+});
+
+
+/*
+   If somehow clicked, move it again.
+*/
+
+yes2.addEventListener("click", (event) => {
+
+    event.preventDefault();
+
+    moveYesButton();
+
+});
+
+
+/* =========================================
+   SCREEN 2 NO
+========================================= */
 
 document.getElementById("no2").addEventListener("click", () => {
 
+    /*
+       Reset the YES button before leaving
+       the screen.
+    */
+
+    yes2.style.position = "";
+    yes2.style.left = "";
+    yes2.style.top = "";
+    yes2.style.zIndex = "";
+
     showScreen(2);
 
 });
 
 
-/* --------------------------------
+/* =========================================
    SCREEN 3
--------------------------------- */
+========================================= */
 
 document.getElementById("continue3").addEventListener("click", () => {
 
@@ -69,29 +172,79 @@ document.getElementById("continue3").addEventListener("click", () => {
 });
 
 
-/* --------------------------------
-   SLIDER
--------------------------------- */
+/* =========================================
+   SCALE
+========================================= */
 
 const slider = document.getElementById("careSlider");
 const dingBtn = document.getElementById("dingBtn");
 
+
+/*
+   Always keep the slider at the bottom.
+
+   Whenever someone tries to drag it upward,
+   immediately return it to 0.
+*/
+
+slider.value = 0;
+
 slider.addEventListener("input", () => {
 
-    const value = Number(slider.value);
+    if (Number(slider.value) > 0) {
 
-    if (value >= 70) {
+        slider.value = 0;
 
-        dingBtn.textContent = "DING DING DING 🔔";
+        /*
+           Small visual "bounce" effect.
+        */
 
-    } else {
+        slider.classList.remove("slider-bounce");
 
-        dingBtn.textContent = "DING DING DING 🔔";
+        void slider.offsetWidth;
 
+        slider.classList.add("slider-bounce");
     }
 
 });
 
+
+/*
+   Also catch mouse/touch attempts.
+*/
+
+slider.addEventListener("change", () => {
+
+    slider.value = 0;
+
+});
+
+
+/*
+   Keep it at zero when clicked.
+*/
+
+slider.addEventListener("mousedown", () => {
+
+    setTimeout(() => {
+        slider.value = 0;
+    }, 50);
+
+});
+
+
+slider.addEventListener("touchstart", () => {
+
+    setTimeout(() => {
+        slider.value = 0;
+    }, 50);
+
+});
+
+
+/* =========================================
+   DING DING DING
+========================================= */
 
 dingBtn.addEventListener("click", () => {
 
@@ -100,9 +253,9 @@ dingBtn.addEventListener("click", () => {
 });
 
 
-/* --------------------------------
+/* =========================================
    SCREEN 5
--------------------------------- */
+========================================= */
 
 document.getElementById("yes5").addEventListener("click", () => {
 
@@ -111,9 +264,9 @@ document.getElementById("yes5").addEventListener("click", () => {
 });
 
 
-/* --------------------------------
-   ESCAPING NO BUTTON
--------------------------------- */
+/* =========================================
+   SCREEN 5 NO BUTTON
+========================================= */
 
 const noButton = document.getElementById("no5");
 
@@ -121,15 +274,11 @@ function moveNoButton() {
 
     const padding = 20;
 
-    const maxX =
-        window.innerWidth -
-        noButton.offsetWidth -
-        padding;
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
 
-    const maxY =
-        window.innerHeight -
-        noButton.offsetHeight -
-        padding;
+    const maxX = window.innerWidth - buttonWidth - padding;
+    const maxY = window.innerHeight - buttonHeight - padding;
 
     const x =
         padding +
@@ -146,16 +295,19 @@ function moveNoButton() {
     noButton.style.top = `${y}px`;
 
     noButton.style.zIndex = "9999";
-
 }
 
 
-/* Desktop */
+/*
+   Desktop
+*/
 
 noButton.addEventListener("mouseenter", moveNoButton);
 
 
-/* Mobile */
+/*
+   Mobile
+*/
 
 noButton.addEventListener("touchstart", (event) => {
 
@@ -166,24 +318,45 @@ noButton.addEventListener("touchstart", (event) => {
 });
 
 
-/* --------------------------------
+/*
+   If clicked, escape again.
+*/
+
+noButton.addEventListener("click", (event) => {
+
+    event.preventDefault();
+
+    moveNoButton();
+
+});
+
+
+/* =========================================
    REPLAY
--------------------------------- */
+========================================= */
 
 document.getElementById("replayBtn").addEventListener("click", () => {
+
+    yes2.style.position = "";
+    yes2.style.left = "";
+    yes2.style.top = "";
+    yes2.style.zIndex = "";
 
     noButton.style.position = "";
     noButton.style.left = "";
     noButton.style.top = "";
+    noButton.style.zIndex = "";
+
+    slider.value = 0;
 
     showScreen(0);
 
 });
 
 
-/* --------------------------------
+/* =========================================
    SHARE
--------------------------------- */
+========================================= */
 
 document.getElementById("shareBtn").addEventListener("click", async () => {
 
