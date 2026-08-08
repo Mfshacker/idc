@@ -544,29 +544,104 @@ button {
 
 
 /* =========================================
-   SLIDER SNAP-BACK
+   MISCHIEVOUS SLIDER
 ========================================= */
 
 #careSlider {
-    transition: transform 0.12s ease;
+    appearance: slider-vertical;
+    -webkit-appearance: slider-vertical;
+
+    writing-mode: vertical-lr;
+    direction: rtl;
+
+    width: 35px;
+    height: 220px;
+
+    cursor: grab;
 }
 
-.slider-bounce {
-    animation: sliderBounce 0.25s ease;
+/*
+   While dragging
+*/
+
+#careSlider:active {
+    cursor: grabbing;
 }
 
-@keyframes sliderBounce {
 
-    0% {
-        transform: scale(1);
-    }
+/*
+   Smooth return to the bottom
+*/
 
-    40% {
-        transform: scale(1.08);
-    }
+#careSlider.returning {
+    transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
+}
 
-    100% {
-        transform: scale(1);
-    }
 
+/*
+   Chrome / Safari track
+*/
+
+#careSlider::-webkit-slider-runnable-track {
+    width: 22px;
+
+    background: #edf4ef;
+
+    border: 2px solid #2f172c;
+
+    border-radius: 999px;
+}
+
+
+/*
+   Chrome / Safari handle
+*/
+
+#careSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    border: 2px solid #35102c;
+
+    box-shadow: 0 2px 0 #8c164d;
+
+    cursor: grab;
+}
+
+#careSlider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+
+/*
+   Firefox
+*/
+
+#careSlider::-moz-range-track {
+    background: #edf4ef;
+
+    border: 2px solid #2f172c;
+
+    border-radius: 999px;
+
+    width: 22px;
+}
+
+#careSlider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    border: 2px solid #35102c;
+
+    cursor: grab;
 }
